@@ -8,8 +8,8 @@ body {
   padding: 0;
 }
 input {
-  width: 236px;
-  height: 38px;
+  width: 180px;
+  height: 35px;
   border: 1px solid #d2d2d2;
   padding: 0 10px;
   outline: none;
@@ -21,21 +21,20 @@ input:focus {
 input[type="submit"] {
   height: 36px;
   width: auto;
-  border: 1px solid #7BC574;
   border-radius: 2px;
   color: white;
   font-size: 12px;
   font-weight: bold;
   padding: 0 20px;
   cursor: pointer;
-  background: #8cd585;
-  background: -moz-linear-gradient(top, #8cd585 0%, #82cd7a 23%, #55ad4c 86%, #4fa945 100%);
+  background: url(gfx/bg-button.png);
+  /*background: -moz-linear-gradient(top, #8cd585 0%, #82cd7a 23%, #55ad4c 86%, #4fa945 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #8cd585), color-stop(23%, #82cd7a), color-stop(86%, #55ad4c), color-stop(100%, #4fa945));
   background: -webkit-linear-gradient(top, #8cd585 0%, #82cd7a 23%, #55ad4c 86%, #4fa945 100%);
   background: -o-linear-gradient(top, #8cd585 0%, #82cd7a 23%, #55ad4c 86%, #4fa945 100%);
   background: -ms-linear-gradient(top, #8cd585 0%, #82cd7a 23%, #55ad4c 86%, #4fa945 100%);
   background: linear-gradient(to bottom, #8cd585 0%, #82cd7a 23%, #55ad4c 86%, #4fa945 100%);
-  filter: progid:dximagetransform.microsoft.gradient(startColorstr='@c1', endColorstr='@c4', GradientType=0);
+  */filter: progid:dximagetransform.microsoft.gradient(startColorstr='@c1', endColorstr='@c4', GradientType=0);
 }
 a {
   text-decoration: none;
@@ -89,7 +88,7 @@ header div.wrapper #btnLogOut {
 }
 #content div.wrapper div.panel {
   border: 1px solid #d2d2d2;
-  background: white;
+  background: url(gfx/bg-footer.png);
   margin: 0;
   margin-bottom: 29px;
   border-radius: 6px;
@@ -162,7 +161,7 @@ header div.wrapper #btnLogOut {
 }
 footer {
   background: url(gfx/bg-footer.png);
-  height: 251px;
+  height: 80px;
   font-size: 14px;
   clear: both;
 }
