@@ -99,6 +99,11 @@ header div.wrapper #btnLogOut {
   height: 313px;
   float: right;
 }
+#content div.wrapper div.panel.right2 {
+  width: 303px;
+  height: 430px;
+  float: right;
+}
 #content div.wrapper div.panel.right textarea.ribbitText {
   width: 249px;
   height: 160px;
