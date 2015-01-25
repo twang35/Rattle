@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from rattle_app.forms import AuthenticateForm, UserCreateForm, RattleForm
 from rattle_app.models import Rattle
+from django.contrib.auth.decorators import login_required
 
 def index(request, auth_form=None, user_form=None):
     # User is logged in
@@ -60,3 +61,27 @@ def signup(request):
         else:
             return index(request, user_form=user_form)
     return redirect('/')
+
+@login_required
+def submit(request):
+    if request.method == "POST":
+        rattle_form = RattleForm(data=request.POST)
+        next_url = request.POST.get("next_url", "/")
+        if rattle_form.is_valid():
+            rattle = rattle_form.save(commit=False)
+            rattle.user = request.user
+            rattle.save()
+            return redirect(next_url)
+        else:
+            return public(request, rattle_form)
+    return redirect('/')
+
+@login_required
+def public(request, ribbit_form=None):
+    ribbit_form = ribbit_form or RibbitForm()
+    ribbits = Ribbit.objects.reverse()[:10]
+    return render(request,
+                  'public.html',
+                  {'ribbit_form': ribbit_form, 'next_url': '/ribbits',
+                   'ribbits': ribbits, 'username': request.user.username})
+

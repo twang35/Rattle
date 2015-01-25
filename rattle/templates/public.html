@@ -2,25 +2,25 @@
  
 {% block content %}
     <div class="panel right">
-        <h1>Create a Ribbit</h1>
+        <h1>Create a Rattle</h1>
         <p>
             <form action="/submit" method="post">
-            {% for field in ribbit_form %}{% csrf_token %}
+            {% for field in rattle_form %}{% csrf_token %}
             {{ field }}
             {% endfor %}
             <input type="hidden" value="{{ next_url }}" name="next_url">
-            <input type="submit" value="Ribbit!">
+            <input type="submit" value="Rattle!">
             </form>
         </p>
     </div>
     <div class="panel left">
-        <h1>Public Ribbits</h1>
-        {% for ribbit in ribbits %}
-        <div class="ribbitWrapper">
-            <img class="avatar" src="{{ ribbit.user.profile.gravatar_url }}">
-            <span class="name">{{ ribbit.user.first_name }}</span>@{{ ribbit.user.username }}
-            <span class="time">{{ ribbit.creation_date|timesince }}</span>
-            <p>{{ ribbit.content }}</p>
+        <h1>Public Rattles</h1>
+        {% for rattle in rattles %}
+        <div class="rattleWrapper">
+            <img class="avatar" src="{{ rattle.user.profile.gravatar_url }}">
+            <span class="name">{{ rattle.user.first_name }}</span>@{{ rattle.user.username }}
+            <span class="time">{{ rattle.creation_date|timesince }}</span>
+            <p>{{ rattle.content }}</p>
         </div>
         {% endfor %}
     </div>
