@@ -1,53 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<!-- 
-	<script src="less.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css"> 
-	-->
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
 {% extends "base.html" %}
-<body>
-	<header>
-		<div class="wrapper">
-			<img src="gfx/logo.png" height="65" width="300" style="vertical-align:bottom">
-			<form align="right">
-				<!-- <label> Email: </label> -->
-				<input name="email" placeholder="Email" type="text" align="right">
-				<!-- <label> Password: </label> -->
-				<input name="password" placeholder="Password" type="password" align="right">
-				<input type="submit" value="Login" align="right">
-			</form>
-		</div>
-	</header>
-	<div id="content">
-		<div class="wrapper">
-			<!-- <img src="gfx/frog.jpg" HEIGHT="400" WIDTH="500" BORDER="0"> -->
-			<div class="panel right2">
-				<h1><b>New to Rattle?</b></h1>
-				<p>
-					<form>
-						<!-- <label> First Name: </label> <br /> -->
-						<input name="first_name" placeholder="First Name" type="text">				<!-- <label> Email: </label> <br/> -->
-						<input name="last_name" placeholder="Last Name" type="text">
-						<input name="email" placeholder="Email" type="text">
-						 <!-- <label> Username: </label> <br /> -->
-						<input name="username" placeholder="Username" type="text">
-						<!-- <label> Password: </label> <br/> -->
-						<input name="password1" placeholder="Password" type="text"> <br/>
-						<!-- <label> Confirm Password: </label> <br/> -->
-						<input name="password2" placeholder="Password Confirmation" type="password"> 
-						<input type="submit" value="Create Account">
-					</form>
-				</p>
-			</div>
-		</div>
-	</div>
-	<footer>
-		<div class="wrapper">
-			Rattle - A Twitter Clone<img src="gfx/logo-nettuts.png">
-		</div>
-	</footer>
-</body>
-</html>
+
+{% block login %}
+    <form action="/login" method="post">{% csrf_token %}
+        {% for field in auth_form %}
+        {{ field }}
+        {% endfor %}
+        <input type="submit" id="btnLogIn" value="Log In">
+    </form>
+{% endblock %}
+ 
+{% block content %}
+{% if auth_form.non_field_errors or user_form.non_field_errors %}
+<div class="flash error">
+    {{ auth_form.non_field_errors }}
+    {{ user_form.non_field_errors }}
+</div>
+{% endif %}
+
+<img src="{{ STATIC_URL}}gfx/frog.jpg">
+<div class="panel right">
+    <h1>New to Ribbit?</h1>
+    <p>
+        <form action="/signup" method="post">{% csrf_token %}
+            {% for field in user_form %}
+            {{ field }}
+            {% endfor %}
+            <input type="submit" value="Create Account">
+        </form>
+    </p>
+</div>
+{% endblock %}
