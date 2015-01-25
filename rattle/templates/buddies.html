@@ -1,95 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<!-- 
-	<script src="less.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css"> 
-	-->
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-	<header>
-		<div class="wrapper">
-			<img src="gfx/logo.png">
-			<span style="color:blue">Rattle</span>
-			<form>
-				<input type="submit" id="btnLogOut" value="Log Out">
-			</form>
-		</div>
-	</header>
-	<div id="content">
-		<div class="wrapper">
-			<div id="createRibbit" class="panel right">
-				<h1>Create a Ribbit</h1>
-				<p>
-					<form>
-						<textarea name="text" class="ribbitText"></textarea>
-						<input type="submit" value="Ribbit!">
-					</form>
-				</p>
-			</div>
-			<div id="ribbits" class="panel left">
-				<h1>Your Ribbit Profile</h1>
-				<div class="ribbitWrapper">
-					<img class="avatar" src="gfx/user1.png">
-					<span class="name">Frogger</span> @username
-					<p>
-						567 Ribbits<span class="spacing">45 Followers</span><span class="spacing">32 Following</span><br>
-						Cras justo odio, dapibus ac facilisis in, egestas Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. <a href="#">http://net.tutsplus.com/tutorials/php/ ...</a>
-					</p>
-				</div>
-			</div>
-			<div class="panel left">
-				<h1>Your Ribbit Buddies</h1>
-				<div class="ribbitWrapper">
-					<img class="avatar" src="gfx/user2.png">
-					<span class="name">Kermit</span> @username <span class="time">15m</span>
-					<p>
-						Cras justo odio, dapibus ac facilisis in, egestas Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. <a href="#">http://net.tutsplus.com/tutorials/php/ ...</a>
-					</p>
-				</div>
-				<div class="ribbitWrapper">
-					<img class="avatar" src="gfx/user1.png">
-					<span class="name">Frogger</span> @username <span class="time">15m</span>
-					<p>
-						Cras justo odio, dapibus ac facilisis in, egestas Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. <a href="#">http://net.tutsplus.com/tutorials/php/ ...</a>
-					</p>
-				</div>
-				<div class="ribbitWrapper">
-					<img class="avatar" src="gfx/user2.png">
-					<span class="name">Kermit</span> @username <span class="time">15m</span>
-					<p>
-						Cras justo odio, dapibus ac facilisis in, egestas Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. <a href="#">http://net.tutsplus.com/tutorials/php/ ...</a>
-					</p>
-				</div>
-				<div class="ribbitWrapper">
-					<img class="avatar" src="gfx/user3.png">
-					<span class="name">Hypnotoad</span> @username <span class="time">15m</span>
-					<p>
-						Cras justo odio, dapibus ac facilisis in, egestas Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. <a href="#">http://net.tutsplus.com/tutorials/php/ ...</a>
-					</p>
-				</div>
-				<div class="ribbitWrapper">
-					<img class="avatar" src="gfx/user2.png">
-					<span class="name">Kermit</span> @username <span class="time">15m</span>
-					<p>
-						Cras justo odio, dapibus ac facilisis in, egestas Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. <a href="#">http://net.tutsplus.com/tutorials/php/ ...</a>
-					</p>
-				</div>
-				<div class="ribbitWrapper">
-					<img class="avatar" src="gfx/user3.png">
-					<span class="name">Hypnotoad</span> @username <span class="time">15m</span>
-					<p>
-						Cras justo odio, dapibus ac facilisis in, egestas Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. <a href="#">http://net.tutsplus.com/tutorials/php/ ...</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<footer>
-		<div class="wrapper">
-			Ribbit - A Twitter Clone Tutorial<img src="gfx/logo-nettuts.png">
-		</div>
-	</footer>
-</body>
-</html>
+{% extends "base.html" %}
+{% block login %}
+    {% with user.username as username %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+ 
+{% block content %}
+    <div class="panel right">
+        <h1>Create a Rattle</h1>
+        <p>
+            <form action="/submit" method="post">
+            {% for field in rattle_form %}{% csrf_token %}
+            {{ field }}
+            {% endfor %}
+            <input type="hidden" value="{{ next_url }}" name="next_url">
+            <input type="submit" value="Rattle!">
+            </form>
+        </p>
+    </div>
+    <div class="panel left">
+        <h1>Buddies' Rattles</h1>
+        {% for rattle in rattles %}
+        <div class="rattleWrapper">
+            <a href="/users/{{ rattle.user.username }}">
+                <img class="avatar" src="{{ rattle.user.profile.gravatar_url }}">
+                <span class="name">{{ rattle.user.first_name }}</span>
+            </a>
+            @{{ rattle.user.username }}
+            <p>
+                {{ rattle.content }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
