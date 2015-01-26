@@ -7,7 +7,7 @@
 	text-shadow: @color 0 0 1px;
 }
 
-.gradient4f (@p1, @c1, @p2, @c2, @p3, @c3, @p4, @c4) {
+/*.gradient4f (@p1, @c1, @p2, @c2, @p3, @c3, @p4, @c4) {
 	background: @c1;
 	background: -moz-linear-gradient(top,  @c1 @p1,  @c2 @p2,  @c3 @p3,  @c4 @p4);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(@p1, @c1), color-stop(@p2, @c2), color-stop(@p3, @c3), color-stop(@p4, @c4));
@@ -16,7 +16,8 @@
 	background: -ms-linear-gradient(top, @c1 @p1, @c2 @p2, @c3 @p3, @c4 @p4);
 	background: linear-gradient(to bottom, @c1 @p1, @c2 @p2, @c3 @p3, @c4 @p4);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@c1', endColorstr='@c4', GradientType=0);
-}
+}*/
+
 
 * {
 	font-family: Helvetica, Arial, sans-serif;
@@ -24,7 +25,7 @@
 }
 
 body {
-	background: white url(gfx/bg.png);
+	background: black url(gfx/bg.png);
 	margin: 0; padding: 0;
 }
 
@@ -48,15 +49,17 @@ input {
 input[type="submit"] {
 	height: 36px;
 	width: auto;
-	border: 1px solid #7BC574;
+	border: 1px solid #000000;
 	border-radius: 2px;
 	color: white;
 	font-size: 12px;
 	font-weight: bold;
 	padding: 0 20px;
 	cursor: pointer;
-	.gradient4f(0%, #8CD585, 23%, #82CD7A, 86%, #55AD4C, 100%, #4FA945);
-}
+	background: url(gfx/bg-button.png);
+	background-size: 600px 800px;
+	/*.gradient4f(0%, #8CD585, 23%, #82CD7A, 86%, #55AD4C, 100%, #4FA945);
+*/}
 
 a {
 	text-decoration: none;
@@ -73,13 +76,14 @@ a {
 
 header {
 	background: url(gfx/bg-header.png);
-	height: 85px;
+	opacity: .85;
+	height: 80px;
 	width: 100%;
 	div.wrapper {
-		padding: 20px 0;
+		padding: 10px 0;
 		img {
 			position: relative;
-			top: 10px;
+			top: 0px;
 			margin: 0 15px 0 0;
 		}
 		span {
@@ -110,13 +114,14 @@ header {
 		}
 		div.panel {
 			border: 1px solid @border-color;
-			background: white;
+			background: url(gfx/bg-footer.png);
+			opacity: .9;
 			margin: 0;
 			margin-bottom: 29px;
 			border-radius: 6px;
 			font-size: 14px;
 			&.right {
-				width: 303px;
+				width: 250px;
 				height: 433px;
 				float: right;
 				textarea.ribbitText {
@@ -187,8 +192,9 @@ header {
 }
 
 footer {
-	background: url(gfx/bg-footer.png);
-	height: 251px;
+	background: url(gfx/bg1.png);
+	opacity: .8;
+	height: 85px;
 	font-size: 14px;
 	clear: both;
 	div.wrapper {

@@ -17,9 +17,9 @@
 </div>
 {% endif %}
 
-<img src="{{ STATIC_URL}}gfx/frog.jpg">
+<!-- <img src="{{ STATIC_URL}}gfx/bg.png"> -->
 <div class="panel right">
-    <h1>New to Rattle?</h1>
+    <h1><b>New to Rattle?</b></h1>
     <p>
         <form action="/signup" method="post">{% csrf_token %}
             {% for field in user_form %}
