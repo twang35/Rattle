@@ -79,7 +79,7 @@ def submit(request):
 @login_required
 def public(request, rattle_form=None):
     rattle_form = rattle_form or RattleForm()
-    rattles = Ribbit.objects.reverse()[:10]
+    rattles = Rattle.objects.reverse()[:10]
     return render(request,
                   'public.html',
                   {'rattle_form': rattle_form, 'next_url': '/rattles',
