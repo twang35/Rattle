@@ -77,11 +77,11 @@ def submit(request):
     return redirect('/')
 
 @login_required
-def public(request, ribbit_form=None):
-    ribbit_form = ribbit_form or RibbitForm()
-    ribbits = Ribbit.objects.reverse()[:10]
+def public(request, rattle_form=None):
+    rattle_form = rattle_form or RattleForm()
+    rattles = Ribbit.objects.reverse()[:10]
     return render(request,
                   'public.html',
-                  {'ribbit_form': ribbit_form, 'next_url': '/ribbits',
-                   'ribbits': ribbits, 'username': request.user.username})
+                  {'rattle_form': rattle_form, 'next_url': '/rattles',
+                   'rattles': rattles, 'username': request.user.username})
 
