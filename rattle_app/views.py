@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 from rattle_app.forms import AuthenticateForm, UserCreateForm, RattleForm
 from rattle_app.models import Rattle
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
 
 def index(request, auth_form=None, user_form=None):
     # User is logged in
@@ -85,3 +88,45 @@ def public(request, rattle_form=None):
                   {'rattle_form': rattle_form, 'next_url': '/rattles',
                    'rattles': rattles, 'username': request.user.username})
 
+def get_latest(user):
+    try:
+        return user.rattle_set.order_by('-id')[0]
+    except IndexError:
+        return ""
+ 
+ 
+@login_required
+def users(request, username="", rattle_form=None):
+    if username:
+        # Show a profile
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise Http404
+        rattles = Rattle.objects.filter(user=user.id)
+        if username == request.user.username or request.user.profile.follows.filter(user__username=username):
+            # Self Profile or buddies' profile
+            return render(request, 'user.html', {'user': user, 'rattles': rattles, })
+        return render(request, 'user.html', {'user': user, 'rattles': rattles, 'follow': True, })
+    users = User.objects.all().annotate(rattle_count=Count('rattle'))
+    rattles = map(get_latest, users)
+    obj = zip(users, rattles)
+    rattle_form = rattle_form or RattleForm()
+    return render(request,
+                  'profiles.html',
+                  {'obj': obj, 'next_url': '/users/',
+                   'rattle_form': rattle_form,
+                   'username': request.user.username, })
+
+
+@login_required
+def follow(request):
+    if request.method == "POST":
+        follow_id = request.POST.get('follow', False)
+        if follow_id:
+            try:
+                user = User.objects.get(id=follow_id)
+                request.user.profile.follows.add(user.profile)
+            except ObjectDoesNotExist:
+                return redirect('/users/')
+    return redirect('/users/')

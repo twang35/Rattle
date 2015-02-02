@@ -12,5 +12,9 @@ urlpatterns = patterns('',
 
     url(r'^rattles$', 'rattle_app.views.public'),		# public rattles
     url(r'^submit$', 'rattle_app.views.submit'),		# submit new rattle
+    
+    url(r'^users/$', 'rattle_app.views.users'),
+    url(r'^users/(?P<username>\w{0,30})/$', 'rattle_app.views.users'),
+    url(r'^follow$', 'rattle_app.views.follow'),
     url(r'^admin/', include(admin.site.urls)),
 )
