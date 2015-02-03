@@ -16,7 +16,7 @@ class UserCreateForm(UserCreationForm):
         form = super(UserCreateForm, self).is_valid()
         for f, error in self.errors.iteritems():
             if f != '__all_':
-                self.fields[f].widget.attrs.update({'class': 'error', 'value': strip_tags(error)})
+                self.fields[f].widget.attrs.update({'class': 'error', 'value': ''})
         return form
  
     class Meta:
