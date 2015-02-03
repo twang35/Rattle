@@ -21,7 +21,7 @@
 <div class="panel right">
     <h1><b>New to Rattle?</b></h1>
     <p>
-        <form action="/signup" method="post" style="horizontal-align:middle">{% csrf_token %}
+        <form action="/signup" method="post">{% csrf_token %}
             {% for field in user_form %}
             {{ field }}
             {% endfor %}
