@@ -16,8 +16,8 @@ def index(request, auth_form=None, user_form=None):
     if request.user.is_authenticated():
         rattle_form = RattleForm()
         user = request.user
-        rattles_self = Rattle.objects.filter(user=user.id)
-        rattles_buddies = Rattle.objects.filter(user__userprofile__in=user.profile.follows.all)
+        rattles_self = Rattle.objects.filter(user=user.id).order_by('-creation_date')
+        rattles_buddies = Rattle.objects.filter(user__userprofile__in=user.profile.follows.all).order_by('-creation_date')
         rattles = rattles_self | rattles_buddies
  
         return render(request,
@@ -82,7 +82,7 @@ def submit(request):
 @login_required
 def public(request, rattle_form=None):
     rattle_form = rattle_form or RattleForm()
-    rattles = Rattle.objects.reverse()[:10]
+    rattles = Rattle.objects.order_by('-creation_date')[:10]
     return render(request,
                   'public.html',
                   {'rattle_form': rattle_form, 'next_url': '/rattles',
@@ -103,7 +103,7 @@ def users(request, username="", rattle_form=None):
             user = User.objects.get(username=username)
         except User.DoesNotExist:
             raise Http404
-        rattles = Rattle.objects.filter(user=user.id)
+        rattles = Rattle.objects.filter(user=user.id).order_by('-creation_date')
         rattle_form = rattle_form or RattleForm()
         if username == request.user.username or request.user.profile.follows.filter(user__username=username):
             # Self Profile or buddies' profile
