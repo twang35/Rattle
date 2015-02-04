@@ -1,10 +1,10 @@
-@text-color: #3F3E3D;
-@border-color: #D2D2D2;
+@text-color: #000000;
+@border-color: #000000;
 @content-width: 860px;
 
 .antialiased (@color) {
 	color: @color;
-	text-shadow: @color 0 0 1px;
+	text-shadow: @color 0 0 0;
 }
 
 /*.gradient4f (@p1, @c1, @p2, @c2, @p3, @c3, @p4, @c4) {
@@ -30,7 +30,7 @@ body {
 }
 
 input {
-	width: 179px;
+	width: 195px;
 	height: 38px;
 	border: 1px solid @border-color;
 	padding: 0 10px;
@@ -72,13 +72,18 @@ a {
 .wrapper {
 	width: @content-width;
 	margin: auto;
+	color: @text-color
 }
 
 header {
 	background: url(gfx/bg-header.png);
 	opacity: .85;
 	height: 80px;
-	width: 100%;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid @border-color;
+	border-radius: 6px;
 	div.wrapper {
 		padding: 10px 0;
 		img {
@@ -88,12 +93,12 @@ header {
 		}
 		span {
 			font-size: 18px;
-			margin: 0 20px 0 0;
+			margin: 0 0 0 0;
 		}
 		form {
 			display: inline;
 			input {
-				margin: 0 0 0 14px;
+				margin: 0 0 0 0;
 			}
 		}
 		#btnLogOut {
@@ -113,7 +118,7 @@ header {
 			float: left;
 		}
 		div.panel {
-			border: 1px solid @border-color;
+			border: 2px solid @border-color;
 			background: url(gfx/bg-footer.png);
 			opacity: .9;
 			margin: 0;
@@ -122,18 +127,28 @@ header {
 			font-size: 14px;
 			&.right {
 				width: 310px;
-				height: 433px;
+				height: 450px;
 				float: right;
 				textarea.rattleText {
 					width: 250px;
-					height: 250px;
+					height: 150px;
 					border: 1px solid @border-color;
+				}
+			}
+			&.right2 {
+			width: 310px;
+			height: 300px;
+			float: right;
+			textarea.rattleText {
+				width: 250px;
+				height: 150px;
+				border: 1px solid @border-color;
 				}
 			}
 			&.left {
 				width: @content-width - 327;
 				float: left;
-				div.ribbitWrapper {
+				div.rattleWrapper {
 					padding: 15px 0;
 					border-bottom: 1px solid @border-color;
 					&:last-child {
@@ -146,7 +161,7 @@ header {
 						}
 						&.time {
 							font-size: 12px;
-							color: #CCC;
+							color: #000000;
 						}
 					}
 					img.avatar {
@@ -170,7 +185,7 @@ header {
 			}
 			
 			* {
-				margin: 6px 0;
+				margin: 6px 5px;
 			}
 			form {
 				padding: 0 23px;
@@ -192,13 +207,18 @@ header {
 }
 
 footer {
-	background: url(gfx/bg1.png);
+	background: url(gfx/bg-header.png);
 	opacity: .8;
-	height: 85px;
-	font-size: 14px;
+	height: 50px;
+	font-size: 10px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid @border-color;
+	border-radius: 6px;
 	clear: both;
 	div.wrapper {
-		padding: 15px;
+		padding: 6px;
 		img {
 			margin-right: 5px;
 			float: right;

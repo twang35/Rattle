@@ -10,9 +10,9 @@
             <img src="{{ STATIC_URL }}gfx/logo.png" height="65" width="300" style="vertical-align:middle">
             <!-- <span>Twitter Clone</span> -->
             {% block login %}
-            <a href="/">Home</a>
-            <a href="/users/">Public Profiles</a>
-            <a href="/users/{{ username }}">My Profile</a>
+            <a href="/">Home</a> | 
+            <a href="/users/">Public Profiles</a> | 
+            <a href="/users/{{ username }}">My Profile</a> | 
             <a href="/rattles">Public Rattles</a>
             <form action="/logout">
                 <input type="submit" id="btnLogOut" value="Log Out">
@@ -42,16 +42,17 @@
             {% endblock %}
         </div>
     </div>
-    <footer>
+<!--     <footer>
         <div class="wrapper">
-            Rattle - A Twitter Clone
-            <!-- <a href="http://net.tutsplus.com">
+
+            <h3>Rattle - A Twitter Clone</h3>
+            <a href="http://net.tutsplus.com">
                 <img src="{{ STATIC_URL }}gfx/logo-nettuts.png">
             </a>
             <a href="http://www.djangoproject.com/">
-                <img src="https://www.djangoproject.com/m/img/badges/djangomade124x25.gif" border="0" alt="Made with Django." title="Made with Django." /> -->
+                <img src="https://www.djangoproject.com/m/img/badges/djangomade124x25.gif" border="0" alt="Made with Django." title="Made with Django." />
             </a>
         </div>
-    </footer>
+    </footer> -->
 </body>
 </html>

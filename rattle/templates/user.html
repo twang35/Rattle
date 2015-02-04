@@ -28,7 +28,18 @@
             {% endif %}
         </div>
     </div>
- 
+    <div class="panel right2">
+        <h1>Create a Rattle</h1>
+        <p>
+            <form action="/submit" method="post">
+            {% for field in rattle_form %}{% csrf_token %}
+            {{ field }}
+            {% endfor %}
+            <input type="hidden" value="{{ next_url }}" name="next_url">
+            <input type="submit" value="Rattle!">
+            </form>
+        </p>
+    </div>
     <div class="panel left">
         <h1>{{ user.first_name }}'s Rattles</h1>
         {% for rattle in rattles %}
