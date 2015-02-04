@@ -104,12 +104,13 @@ def users(request, username="", rattle_form=None):
         except User.DoesNotExist:
             raise Http404
         rattles = Rattle.objects.filter(user=user.id)
+        rattle_form = rattle_form or RattleForm()
         if username == request.user.username or request.user.profile.follows.filter(user__username=username):
-            rattle_form = rattle_form or RattleForm()
             # Self Profile or buddies' profile
             return render(request, 'user.html', {'rattle_form': rattle_form, 
                 'next_url': "/users/%s" % username, 'user': user, 'rattles': rattles, })
-        return render(request, 'user.html', {'user': user, 'rattles': rattles, 'follow': True, })
+        return render(request, 'user.html', {'rattle_form': rattle_form, 
+                'next_url': "/users/%s" % username, 'user': user, 'rattles': rattles, 'follow': True, })
     users = User.objects.all().annotate(rattle_count=Count('rattle'))
     rattles = map(get_latest, users)
     obj = zip(users, rattles)
