@@ -18,6 +18,17 @@
 {% endif %}
 
 <!-- <img src="{{ STATIC_URL}}gfx/bg.png"> -->
+<div class="panel left">
+    <h1>Public Rattles</h1>
+    {% for rattle in rattles %}
+    <div class="rattleWrapper">
+        <img class="avatar" src="{{ rattle.user.profile.gravatar_url }}">
+        <span class="name">{{ rattle.user.first_name }}</span>@{{ rattle.user.username }}
+        <span class="time">{{ rattle.creation_date|timesince }}</span>
+        <p>{{ rattle.content }}</p>
+    </div>
+    {% endfor %}
+</div>
 <div class="panel right">
     <h1><b>New to Rattle?</b></h1>
     <p>

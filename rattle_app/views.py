@@ -29,10 +29,12 @@ def index(request, auth_form=None, user_form=None):
         # User is not logged in
         auth_form = auth_form or AuthenticateForm()
         user_form = user_form or UserCreateForm()
+        rattles = Rattle.objects.order_by('-creation_date')[:10]
  
         return render(request,
                       'home.html',
-                      {'auth_form': auth_form, 'user_form': user_form, })
+                      {'auth_form': auth_form,
+                        'rattles': rattles, 'user_form': user_form, })
 
 def login_view(request):
     if request.method == 'POST':
